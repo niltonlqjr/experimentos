@@ -3,10 +3,10 @@ if you want to use llvm-15.0.2 in your project (required to run Wu Larus) run th
 building docker image:
 	cd docker
 	./create_docker.sh
-Buuild this way, the container will have a user named "nonroot" that have sudo permissions and also the have the same user id and group id of your system user.
+Build this way, the container will have a user named "nonroot" that has sudo permissions and also have the same user id and group id of your system user.
 
 To run the docker image and get access to all files inside this directory (must build it first):
 	cd docker
 	./run_docker.sh
-The run_docker.sh script also set this directory as home to it default user. Using this script also keep the default user with the same user id and group id of your system user (in another words, any file that you create inside the container will be created outside and with the system user that built and ran the container). 
+The run_docker.sh script also set this directory as home to its default user. Using this script also keeps the default user with the same user id and group id of your system user (in other words, any file that you create inside the container will be created outside and with the system user that built and ran the container). 
 	
