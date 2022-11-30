@@ -8,7 +8,8 @@ RUN apt-get update
 RUN DEBIAN_FRONTEND="noninteractive" TZ="America/Sao_Paulo" \
     apt-get -y install llvm-12 clang-12 libclang-12-dev clang-format-12 libclang1-12 libclang-12-dev libclang-common-12-dev \
     gcc-9 g++-9 \
-    python3 python3-dev python3-pip python3-setuptools python3-ipython python-is-python3 \ 
+    python3 python3-dev python3-pip python3-setuptools python3-ipython python-is-python3 \
+    ninja-build \
     wget vim binutils git tar zip unzip git cmake linux-tools-common linux-tools-generic texlive-latex-base sudo net-tools libtinfo5
 
 RUN rm /usr/bin/gcc && rm /usr/bin/g++ \
