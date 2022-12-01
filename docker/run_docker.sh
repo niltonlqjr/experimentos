@@ -6,4 +6,6 @@ $CONTAINER_CMD run --interactive --tty --rm \
   --workdir $VOLUME_DIR \
   --volume $VOLUME_DIR:$VOLUME_DIR \
   --user "$(id -u):$(id -g)" \
+  --security-opt seccomp=${WORK_DIR}/perf_event_open.json \
+  --privileged \
   $CONTAINER_IMAGE "$@"

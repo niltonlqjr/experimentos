@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 ARG USER_ID
 ARG GROUP_ID
+ARG KERNEL_VERSION
 
 
 RUN apt-get update
@@ -10,7 +11,7 @@ RUN DEBIAN_FRONTEND="noninteractive" TZ="America/Sao_Paulo" \
     gcc-9 g++-9 \
     python3 python3-dev python3-pip python3-setuptools python3-ipython python-is-python3 \
     ninja-build \
-    wget vim binutils git tar zip unzip git cmake linux-tools-common linux-tools-generic texlive-latex-base sudo net-tools libtinfo5
+    wget vim binutils git tar zip unzip git cmake linux-tools-common linux-tools-generic linux-tools-${KERNEL_VERSION} texlive-latex-base sudo net-tools libtinfo5
 
 RUN rm /usr/bin/gcc && rm /usr/bin/g++ \
     &&ln -s /usr/bin/gcc-9 /usr/bin/gcc \
