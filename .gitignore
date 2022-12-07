@@ -5,4 +5,5 @@ runtime-prediction/
 .local/
 .viminfo
 .python_history
+.lesshst
 
