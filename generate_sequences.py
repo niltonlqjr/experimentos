@@ -60,8 +60,11 @@ def generate_seqs(seed, lmin, lmax, total, prog_path, flags):
         #     seq_str += [seq]
 
         if can_compile(prog_path, seq_str): # Some sequences may brake a program.
+            if seq_str not in generated_seqs:
+                ret[len(generated_seqs)] = new_seq
             generated_seqs[seq_str] = None # Add new generated sequence.
-            ret[len(generated_seqs)] = new_seq
+            
+                
     
     #i=0
     #for seq in generated_seqs.keys(): # Print generated sequences to stdout.
