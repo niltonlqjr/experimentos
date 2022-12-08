@@ -4,7 +4,8 @@ import yaml as yl
 
 
 def read_sequences(data):
-    pass
+    return data['sequences']
+    
 
 def read_embeeding_from_file(file):
     with open(file) as f:
@@ -21,6 +22,7 @@ def read_ir2vec_embeeding(bench_dir, compiler, sequence,
     cur_dir = os.getcwd()
     os.chdir(bench_dir)
     cmd = f'./compile.sh {compiler} "{sequence}" {workset} 1'
+    print(cmd)
     os.system(cmd)
     ir2vec_cmd_line += f' -o={ir2vec_output} {IR_filename}'
     os.system(ir2vec_cmd_line)
@@ -93,14 +95,14 @@ try:
     sequences=read_sequences(sequences_data)
 except:
     print('Error opening sequences file\nExtracting IR2Vec with default optimization levels')
-    sequences={'S0':['-O0'],
-               'S1':['-O1'],
-               'S2':['-O2'],
-               'S3':['-O3'],
-               'S4':['-Os'],
-               'S5':['-Oz']}
+    sequences={0:['-O0'],
+               1:['-O1'],
+               2:['-O2'],
+               3:['-O3'],
+               4:['-Os'],
+               5:['-Oz']}
     #definir um formato para as sequencias
-
+print(sequences)
 ir2vec_line = f'{ir2vec_cmd} {ir2vec_flags} --vocab={ir2vec_vocab}'
 output={}
 for s in sequences:

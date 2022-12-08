@@ -43,6 +43,7 @@ def can_compile(prog_path, seq_str):
 def generate_seqs(seed, lmin, lmax, total, prog_path, flags):
     random.seed(seed)
     generated_seqs = dict()
+    ret=dict()
     while len(generated_seqs) < total:
         N = random.randint(lmin, lmax)
         new_seq = []
@@ -60,11 +61,12 @@ def generate_seqs(seed, lmin, lmax, total, prog_path, flags):
 
         if can_compile(prog_path, seq_str): # Some sequences may brake a program.
             generated_seqs[seq_str] = None # Add new generated sequence.
-    ret=dict()
-    i=0
-    for seq in generated_seqs.keys(): # Print generated sequences to stdout.
-        ret[i] = seq
-        i+=1
+            ret[len(generated_seqs)] = new_seq
+    
+    #i=0
+    #for seq in generated_seqs.keys(): # Print generated sequences to stdout.
+    #    ret[i] = seq.split(' ')
+    #    i+=1
     return ret
 
 
