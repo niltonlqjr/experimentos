@@ -11,11 +11,15 @@ RUN DEBIAN_FRONTEND="noninteractive" TZ="America/Sao_Paulo" \
     gcc-9 g++-9 \
     python3 python3-dev python3-pip python3-setuptools python3-ipython python-is-python3 \
     ninja-build \
-    wget vim binutils git tar zip unzip git cmake linux-tools-common linux-tools-generic linux-tools-${KERNEL_VERSION} texlive-latex-base sudo net-tools libtinfo5
+    wget vim binutils git tar zip unzip git cmake linux-tools-common linux-tools-generic linux-tools-${KERNEL_VERSION} texlive-latex-base sudo net-tools libtinfo5 bc
 
 RUN rm /usr/bin/gcc && rm /usr/bin/g++ \
-    &&ln -s /usr/bin/gcc-9 /usr/bin/gcc \
-    && ln -s /usr/bin/g++-9 /usr/bin/g++
+    && ln -s /usr/bin/gcc-9 /usr/bin/gcc \
+    && ln -s /usr/bin/g++-9 /usr/bin/g++ \
+    && ln -s /usr/bin/clang-12 /usr/bin/clang \
+    && ln -s /usr/bin/opt-12 /usr/bin/opt \
+    && ln -s /usr/bin/llvm-link-12 /usr/bin/llvm-link \
+    && ln -s /usr/bin/llc-12 /usr/bin/llc 
 
 RUN wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.gz \
     && tar -xvzf eigen-3.3.7.tar.gz \
