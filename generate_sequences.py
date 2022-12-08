@@ -74,7 +74,7 @@ def generate_seqs(seed, lmin, lmax, total, prog_path, flags):
 
 def init_argparse() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        usage="%(prog)s [--min VAL] [--max VAL] [--seed VAL] [--total VAL] [--flags-file PATH_TO_FILE] --prog PATH_TO_BENCHMARK",
+        usage="%(prog)s [--min VAL] [--max VAL] [--seed VAL] [--total VAL] [--flags-file PATH_TO_FILE] [-o OUTPUT_FILE] --prog PATH_TO_BENCHMARK",
         description="Generate random sequences of optimizations."
     )
     parser.add_argument('--min', dest='len_min', default=default_len_min)
