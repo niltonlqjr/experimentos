@@ -20,7 +20,7 @@ def read_ir2vec_embeeding(bench_dir, compiler, sequence,
                           ir2vec_output, IR_filename):
     cur_dir = os.getcwd()
     os.chdir(bench_dir)
-    cmd = f'./compile.sh {compiler} {sequence} {workset} 1'
+    cmd = f'./compile.sh {compiler} "{sequence}" {workset} 1'
     os.system(cmd)
     ir2vec_cmd_line += f' -o={ir2vec_output} {IR_filename}'
     os.system(ir2vec_cmd_line)
