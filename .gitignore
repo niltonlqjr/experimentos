@@ -1,3 +1,4 @@
+benchmarks/
 llvm-15.0.2/
 testes/
 runtime-prediction/
