@@ -4,7 +4,7 @@ benchmarks_dir=../benchmarks/cpu2006
 script_dir=../generate_sequences
 flags_file=../flags_opt12/yamls/set_flags_O0+O1+O2+O3+Os+Oz.yaml
 output_dir=../results/sequences/spec2006
-min_len=1
+min_len=5
 max_len=294
 total_seq=100
 
