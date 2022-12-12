@@ -51,6 +51,7 @@ RUN pip3 install tensorflow \
     && pip install -U compiler_gym \
     && pip3 install cython
 
+RUN ln -s /usr/bin/clang++-12 /usr/bin/clang++
 
 RUN addgroup --gid $GROUP_ID nonroot \
     && adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID nonroot \
