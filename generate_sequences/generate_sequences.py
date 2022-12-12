@@ -95,9 +95,10 @@ else:
     flags = LLVM_FLAGS
 
 print(flags)
-seqs = generate_seqs(args.seed, int(args.len_min), int(args.len_max), int(args.total), args.prog,flags)
+seqs = generate_seqs(args.seed, int(args.len_min), int(args.len_max), int(args.total), args.prog, flags)
 data=dict()
 data['metodology'] = dict()
+data['metodology']['used flags'] = flags
 data['metodology']['minimum sequence length'] = args.len_min
 data['metodology']['maximum sequence length'] = args.len_max
 data['metodology']['total sequences'] = args.total
