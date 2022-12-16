@@ -73,7 +73,7 @@ parser.add_argument('--ir2vec-flags',
                     help='ir2vec additional flags')
 parser.add_argument('--ir2vec-output',
                     dest='ir2vec_output',
-                    default='output.ir2vec',
+                    default='output.ir2vec.tmp',
                     help='filename of output for ir2vec (this is a temporary file and will be deleted after its use)')
 args=parser.parse_args()
 
@@ -109,8 +109,16 @@ for s in sequences:
     seq_str=' '.join(sequences[s])
     output[s] = {}
     output[s]['sequence'] = sequences[s]
-    output[s]['embeeding'] = read_ir2vec_embeeding(bench_dir,compiler,seq_str,
+    output[s]['embedding'] = read_ir2vec_embeeding(bench_dir,compiler,seq_str,
                                 workset,ir2vec_line,ir2vec_output,IR_filename)
 
+data = {}
+data['metodology'] = {}
+data['metodology']['compiler']=compiler
+data['metodology']['workset']=workset
+data['metodology']['ir2vec flags']=ir2vec_flags
+
+data['embeddings'] = output
+
 with open(output_file,'w') as f:
-    yl.dump(output,f)
+    yl.dump(data,f)
