@@ -7,13 +7,16 @@ def read_sequences(data):
     return data['sequences']
     
 
-def read_embeeding_from_file(file):
-    with open(file) as f:
-        data = f.read()
-    ret = [float(x) for x in data.split()]
-    if len(ret) != 300:
-        print('error reading output file, vector dimension different from 300')
-        exit(0)
+def read_embedding_from_file(file):
+    try:
+        with open(file) as f:
+            data = f.read()
+        ret = [float(x) for x in data.split()]
+        if len(ret) != 300:
+            print('error reading output file, vector dimension different from 300')
+            exit(0)
+    except:
+        data = []
     return ret
 
 def read_ir2vec_embeeding(bench_dir, compiler, sequence, 
@@ -26,7 +29,7 @@ def read_ir2vec_embeeding(bench_dir, compiler, sequence,
     os.system(cmd)
     ir2vec_cmd_line += f' -o={ir2vec_output} {IR_filename}'
     os.system(ir2vec_cmd_line)
-    emb = read_embeeding_from_file(ir2vec_output)
+    emb = read_embedding_from_file(ir2vec_output)
     os.system(f'rm {ir2vec_output}')
     os.system(f'make -f Makefile.{compiler} cleanup')
     os.chdir(cur_dir)
