@@ -16,7 +16,7 @@ def read_embedding_from_file(file):
             print('error reading output file, vector dimension different from 300')
             exit(0)
     except:
-        data = []
+        ret = []
     return ret
 
 def read_ir2vec_embeeding(bench_dir, compiler, sequence, 
