@@ -19,7 +19,7 @@ def read_embedding_from_file(file):
         ret = []
     return ret
 
-def read_ir2vec_embeeding(bench_dir, compiler, sequence, 
+def read_ir2vec_embedding(bench_dir, compiler, sequence, 
                           workset, ir2vec_cmd_line, 
                           ir2vec_output, IR_filename):
     cur_dir = os.getcwd()
@@ -112,7 +112,7 @@ for s in sequences:
     seq_str=' '.join(sequences[s])
     output[s] = {}
     output[s]['sequence'] = sequences[s]
-    output[s]['embedding'] = read_ir2vec_embeeding(bench_dir,compiler,seq_str,
+    output[s]['embedding'] = read_ir2vec_embedding(bench_dir,compiler,seq_str,
                                 workset,ir2vec_line,ir2vec_output,IR_filename)
 
 data = {}
