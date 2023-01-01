@@ -140,7 +140,7 @@ data['metodology']={}
 data['metodology']['compiler'] = compiler
 data['metodology']['run workset'] = workset_run
 data['metodology']['compile workset'] = workset_compile
-data['metodology']['PCs list'] = PCs_lists
+data['metodology']['PCs lists'] = PCs_lists
 data['metodology']['number of runs'] = runs
 
 data['PCs'] = output
