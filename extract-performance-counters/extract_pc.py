@@ -24,7 +24,7 @@ def read_perf_csv(filename,PCs):
 
 
 def read_PCs(bench_dir, compiler, sequence,
-             PCs_list, workset_compile, workset_run,
+             PCs_lists, workset_compile, workset_run,
              perf_csv,runs):
     cur_dir=os.getcwd()
     str_seq=' '.join(sequence)
@@ -32,15 +32,18 @@ def read_PCs(bench_dir, compiler, sequence,
     compile_cmd = f'./compile.sh {compiler} "{str_seq}" {workset_compile} 1'
     print(compile_cmd)
     os.system(compile_cmd)
-
-    PCs_string = ','.join(PCs_list)
-    run_cmd=f'./get_performance_counters.sh "{PCs_string}" {workset_run} {perf_csv}'
-    print(run_cmd)
-    ret = []
+    ret=[]
     for i in range(runs):
-        os.system(run_cmd)
-        PCs=read_perf_csv(perf_csv,PCs_list)
+        PCs={}
+        for PCs_list in PCs_lists:
+            PCs_string = ','.join(PCs_list)
+            run_cmd=f'./get_performance_counters.sh "{PCs_string}" {workset_run} {perf_csv}'
+            print(run_cmd)
+            os.system(run_cmd)
+            PC=read_perf_csv(perf_csv,PCs_list)
+            PCs.update(PC)
         ret.append(PCs)
+        
 
     os.system(f'rm {perf_csv}')
     os.system(f'make -f Makefile.{compiler} cleanup')
@@ -56,11 +59,13 @@ parser.add_argument('bench_dir',
 parser.add_argument('sequences_file',
                     type=str,
                     help='file contaning optimization sequences')
-parser.add_argument('--PC-file', '-f',
-                    dest='PC_file',
+parser.add_argument('--PC-files', '-f',
+                    dest='PC_files',
                     default='',
                     type=str,
-                    help='yaml file containig performance counters to extract')
+                    nargs='+',
+                    help='yaml files containig performance counters to extract'
+                    +'(each file will do their own runs)')
 parser.add_argument('--runs', '-r',
                     dest='runs',
                     default=10,
@@ -90,7 +95,7 @@ args=parser.parse_args()
 
 bench_dir = args.bench_dir
 sequences_file = args.sequences_file
-PC_file = args.PC_file
+PC_files = args.PC_files
 output_file = args.output_file
 compiler = args.compiler
 workset_run = args.workset_run
@@ -113,18 +118,21 @@ except:
                5:['-Oz']}
 
 try:
-    with open(PC_file) as f:
-        PCs_list = yl.safe_load(f)
+    PCs_lists=[]
+    for PC_file in PC_files:
+        with open(PC_file) as f:
+            PCs=yl.safe_load(f)
+            PCs_lists.append(PCs)
 except:
     print('Error opening performance counters file\n Extracting only instructions:u')
-    PCs_list = ['instructions:u']
+    PCs_lists = [['instructions:u']]
 
 output={}
 
 for s in sequences:
     output[s]={}
     output[s]['sequence'] = sequences[s]
-    output[s]['PCs'] = read_PCs(bench_dir,compiler,sequences[s],PCs_list,
+    output[s]['PCs'] = read_PCs(bench_dir,compiler,sequences[s],PCs_lists,
                     workset_compile,workset_run,perf_output,runs)
 
 data = {}
@@ -132,7 +140,7 @@ data['metodology']={}
 data['metodology']['compiler'] = compiler
 data['metodology']['run workset'] = workset_run
 data['metodology']['compile workset'] = workset_compile
-data['metodology']['PCs list'] = PCs_list
+data['metodology']['PCs list'] = PCs_lists
 data['metodology']['number of runs'] = runs
 
 data['PCs'] = output
