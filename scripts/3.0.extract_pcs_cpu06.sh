@@ -7,7 +7,7 @@ sequences_dir=../results/sequences/spec2006
 output_dir=../results/PCs/spec2006
 log_dir=../logs/PCs/spec2006
 
-PCs_files='../'$script_dir'/PCs_26.yaml'
+PCs_files=$script_dir'/PCs_26.yaml'
 
 mkdir -p ${output_dir}
 mkdir -p ${log_dir}
