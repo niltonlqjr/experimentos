@@ -15,7 +15,7 @@ mkdir -p ${log_dir}
 for b in ${benchmarks[@]}
 do
     echo $b
-    python3 ${script_dir}/extract_pcs.py ${benchmarks_dir}/${b}/src \
+    python3 ${script_dir}/extract_pc.py ${benchmarks_dir}/${b}/src \
             ${sequences_dir}/${b}.yaml -f $PCs_files -r 10 \
             -o=${output_dir}/${b}.yaml > ${log_dir}/${b}.out \
             2> ${log_dir}/${b}.err
